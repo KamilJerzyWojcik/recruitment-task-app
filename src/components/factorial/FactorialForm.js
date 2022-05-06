@@ -4,7 +4,7 @@ import Input from "../ui/Input";
 
 const FactorialForm = (props) => {
   const maxValueNumber = 100;
-  const minValueNumber = -100;
+  const minValueNumber = 0;
 
   const numberInputRef = useRef();
   const [isNumberValid, setIsNumberValid] = useState(true);
@@ -23,7 +23,7 @@ const FactorialForm = (props) => {
       return;
     }
     setIsNumberValid(true);
-    props.onAddToHistory(valueNumber);
+    props.onSubmit(valueNumber);
   };
 
   return (
@@ -41,6 +41,7 @@ const FactorialForm = (props) => {
             defaultValue: "0",
           }}
         />
+        {!props.safeError && <p>Przekroczono dopuszczalną wielkość liczby</p>}
         {!isNumberValid && <p>proszę wpisać liczbę całkowitą od {minValueNumber} do {maxValueNumber}</p>}
         <Button text="Wylicz silnię" />
       </form>
