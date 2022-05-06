@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <section>
-      <h1>About</h1>
+      <h1>O projekcie</h1>
       <h3>Autor Kamil Wójcik, 2022</h3>
       <p>
         Zadanie rekrutacyjne na stanowisko fullstack developer w technologii
