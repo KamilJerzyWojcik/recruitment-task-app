@@ -7,10 +7,10 @@ const commitsUrl = (login, repoName, number=5) =>
 `${BASE_URL}/repos/${login}/${repoName}/commits?per_page=${number}`;
 
 
-export const getRepos = (login) => {
+export const fetchRepos = (login) => {
     return fetch(reposUrl(login));
 };
 
-export const getCommits = (login, repoName) => {
+export const fetchCommits = (login, repoName) => {
     return fetch(commitsUrl(login, repoName))
 };

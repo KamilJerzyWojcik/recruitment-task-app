@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import ProjectList from "../components/github/ProjectList";
 import Search from "../components/github/Search";
-import { getRepos, getCommits } from "../services/GithubService";
+import { fetchRepos, fetchCommits } from "../services/GithubService";
 
 const Github = () => {
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState();
   const [isSearched, setIsSearched] = useState(false);
 
-  const getReposByLogin = async (login) => {
-    const newRepos = await getRepos(login)
+  const getRepos = async (login) => {
+    const newRepos = await fetchRepos(login)
       .then((r) => {
         if (!r.ok) {
           throw new Error(r.message ?? "coś poszło źle");
@@ -36,9 +36,11 @@ const Github = () => {
     return newRepos.map((r) => r.name);
   };
 
+//   const getCommits
+
   const githubSubmitHandler = async (login) => {
     if (error) setError();
-    const result = await getReposByLogin(login);
+    const result = await getRepos(login);
     console.log(result);
   };
 
