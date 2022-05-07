@@ -1,7 +1,7 @@
 import React from "react";
 
-const CommitItem = () => {
-    return <h1>Commit item</h1>
+const CommitItem = props => {
+    return <li key={props.commit.id.toString()}>{props.commit.message}</li>
 };
 
 export default CommitItem;

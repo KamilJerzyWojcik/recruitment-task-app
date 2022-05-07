@@ -25,34 +25,67 @@ const Github = () => {
             url: r.html_url,
           };
         });
-        setRepos(newRepos);
-        setIsSearched(true);
         return newRepos;
       })
       .catch((error) => {
         setError({ message: error.message });
       });
 
-    return newRepos.map((r) => r.name);
+    return newRepos;
   };
 
-//   const getCommits
+  const getCommits = async (login, repoName, repo) => {
+    const commits = await fetchCommits(login, repoName)
+      .then((r) => {
+        if (!r.ok) {
+          setRepos();
+          throw new Error(r.message ?? "coś poszło źle");
+        }
+        return r.json();
+      })
+      .then((result) => {
+        return result.map((c) => {
+          return {
+            id: c.node_id,
+            message: c.commit.message,
+            url: c.commit.url,
+            comitterName: c.commit.committer.name,
+            date: new Date(c.commit.committer.date),
+          };
+        });
+      })
+      .catch((error) => {
+        setError({ message: error.message });
+      });
+
+    return { ...repo, commits: commits };
+  };
+
+  const addCommitsToRepos = async (login, repos) => {
+    const reposWithCommits = await Promise.all(
+      repos.map(async (repo) => {
+        const repoWithCommits = getCommits(login, repo.name, repo);
+        return repoWithCommits;
+      })
+    );
+    return reposWithCommits;
+  };
 
   const githubSubmitHandler = async (login) => {
     if (error) setError();
-    const result = await getRepos(login);
-    console.log(result);
+    const repos = await getRepos(login);
+    const reposWithCommits = await addCommitsToRepos(login, repos);
+    setIsSearched(true);
+    console.log(reposWithCommits);
+    setRepos(reposWithCommits);
   };
-
-  const list = repos.map((r) => <li key={r.id}>{r.name}</li>);
 
   return (
     <div>
       <h1>Wyszukaj projekty na Github</h1>
       <Search onSubmit={githubSubmitHandler} />
       {error && <p>Błąd pobrania danych: {error.message}</p>}
-      {!error && isSearched && list}
-      {!error && isSearched && <ProjectList />}
+      {!error && isSearched && <ProjectList projects={repos} />}
     </div>
   );
 };
