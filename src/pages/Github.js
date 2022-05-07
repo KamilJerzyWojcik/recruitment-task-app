@@ -76,7 +76,6 @@ const Github = () => {
     const repos = await getRepos(login);
     const reposWithCommits = await addCommitsToRepos(login, repos);
     setIsSearched(true);
-    console.log(reposWithCommits);
     setRepos(reposWithCommits);
   };
 
