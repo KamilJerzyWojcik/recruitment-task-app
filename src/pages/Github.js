@@ -4,15 +4,23 @@ import Search from "../components/github/Search";
 import { fetchRepos, fetchCommits } from "../services/GithubService";
 
 const Github = () => {
+  const [curretnLogin, setCurrentLogin] = useState();
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState();
   const [isSearched, setIsSearched] = useState(false);
+  const [isCorrectLogin, setIsCorrectLogin] = useState(true);
 
   const getRepos = async (login) => {
     const newRepos = await fetchRepos(login)
       .then((r) => {
         if (!r.ok) {
-          throw new Error(r.message ?? "coś poszło źle");
+          console.log(r);
+          if (r.status.toString() === "404") {
+            setIsCorrectLogin(false);
+            throw new Error();
+          } else {
+            throw new Error(r.message ?? "coś poszło źle");
+          }
         }
         return r.json();
       })
@@ -28,7 +36,7 @@ const Github = () => {
         return newRepos;
       })
       .catch((error) => {
-        setError({ message: error.message });
+        setError({ message: error.message ?? undefined });
       });
 
     return newRepos;
@@ -38,7 +46,7 @@ const Github = () => {
     const commits = await fetchCommits(login, repoName)
       .then((r) => {
         if (!r.ok) {
-          setRepos();
+          setRepos([]);
           throw new Error(r.message ?? "coś poszło źle");
         }
         return r.json();
@@ -72,19 +80,22 @@ const Github = () => {
   };
 
   const githubSubmitHandler = async (login) => {
-    if (error) setError();
     const repos = await getRepos(login);
+    if (!repos) return;
     const reposWithCommits = await addCommitsToRepos(login, repos);
+    if (!reposWithCommits) return;
     setIsSearched(true);
     setRepos(reposWithCommits);
+    setCurrentLogin(login);
   };
 
   return (
     <div>
       <h1>Wyszukaj projekty na Github</h1>
       <Search onSubmit={githubSubmitHandler} />
-      {error && <p>Błąd pobrania danych: {error.message}</p>}
-      {!error && isSearched && <ProjectList projects={repos} />}
+      {!isCorrectLogin && <p>Brak loginu</p>}
+      {error && error.message && <p>Błąd pobrania danych: {error.message}</p>}
+      {!error && isSearched && <ProjectList projects={repos} login={curretnLogin} />}
     </div>
   );
 };
