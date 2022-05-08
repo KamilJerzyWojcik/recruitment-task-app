@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/recruitment-task-app/static/css/main.76c96ebc.css",
+    "main.js": "/recruitment-task-app/static/js/main.884382a9.js",
+    "static/js/787.1d586929.chunk.js": "/recruitment-task-app/static/js/787.1d586929.chunk.js",
+    "index.html": "/recruitment-task-app/index.html",
+    "main.76c96ebc.css.map": "/recruitment-task-app/static/css/main.76c96ebc.css.map",
+    "main.884382a9.js.map": "/recruitment-task-app/static/js/main.884382a9.js.map",
+    "787.1d586929.chunk.js.map": "/recruitment-task-app/static/js/787.1d586929.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76c96ebc.css",
+    "static/js/main.884382a9.js"
+  ]
+}
