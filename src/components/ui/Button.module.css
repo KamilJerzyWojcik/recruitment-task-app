@@ -1,8 +1,2 @@
-.actions {
-  text-align: right;
-}
-
-.actions__button {
-  font-size: 1.25rem;
-}
+@import url(/Users/kamilwojcik/Projects/react-test/recruitment-task-app/src/styles/button--base.css);
 /*# sourceMappingURL=Button.module.css.map */

@@ -1,7 +1,2 @@
-.form {
-    position: relative;
-  }
-
-  .error {
-    color: red;
-  }
+@import "../../styles/form--base.scss";
+@import "../../styles/error--base.scss";

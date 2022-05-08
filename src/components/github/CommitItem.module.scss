@@ -1,23 +1,21 @@
+@import "../../styles/list.scss";
+
+$justify-content: center;
+$colors__input:(
+    item-normal: goldenrod,
+    item-special: yellowgreen
+);
+
 .list__item {
-    margin: 1rem 0;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    background-color: goldenrod;
+    @extend .item;
+    background-color: map-get($colors__input, item-normal );
+    justify-content: $justify-content;
   }
   
   .list__item__special {
-      margin: 1rem 0;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    background-color: yellowgreen;
+    @extend .item;
+    background-color: map-get($colors__input, item-special );
+    justify-content: $justify-content;
   }
 
 .list__container

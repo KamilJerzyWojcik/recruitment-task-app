@@ -1,14 +1,14 @@
-.control, .form__control {
+.control {
   margin-bottom: 0.5rem;
 }
 
-.control__label, .form__label {
+.control__label {
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.control__input, .form__input {
+.control__input {
   font: inherit;
   padding: 0.35rem;
   border-radius: 4px;
@@ -19,20 +19,8 @@
   font-size: 1.25rem;
 }
 
-.control__input:focus, .form__input:focus, .form__control:focus {
+.control__input:focus {
   background-color: #cbf8f8;
   outline-color: teal;
 }
-
-.form {
-  position: relative;
-}
-
-.actions {
-  text-align: right;
-}
-
-.actions__button {
-  font-size: 1.25rem;
-}
-/*# sourceMappingURL=Search.module.css.map */
+/*# sourceMappingURL=input-base.css.map */

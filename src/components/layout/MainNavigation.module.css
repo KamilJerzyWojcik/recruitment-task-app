@@ -38,9 +38,7 @@
   color: #88dfdf;
 }
 
-.navigation__link:hover,
-.navigation__link:active,
-.navigation__link.active {
+.navigation__link:hover, .navigation__link:active, .navigation__link.active {
   color: #e6fcfc;
 }
 /*# sourceMappingURL=MainNavigation.module.css.map */
