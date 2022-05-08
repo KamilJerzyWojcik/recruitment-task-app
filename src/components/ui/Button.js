@@ -4,7 +4,7 @@ import classes from "./Button.module.css";
 const Button = (props) => {
   return (
     <div className={classes.actions}>
-      <button className="btn">{props.text}</button>
+      <button className={classes.actions__button + " btn"}>{props.text}</button>
     </div>
   );
 };

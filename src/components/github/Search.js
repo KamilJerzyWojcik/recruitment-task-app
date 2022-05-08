@@ -20,13 +20,13 @@ const Search = (props) => {
   return (
     <div>
       <form onSubmit={submitHandler} className={classes.form}>
-        <div className={classes.control}>
-          <label htmlFor="login">Wpisz login</label>
-          <input type="text" id="login" ref={enteredLoginRef} />
+        <div className={classes.form__control}>
+          <label className={classes.form__label} htmlFor="login">Wpisz login</label>
+          <input className={classes.form__input} type="text" id="login" ref={enteredLoginRef} />
           {!isValidLogin && <p>proszę wpisać login</p>}
         </div>
         <div className={classes.actions}>
-        <button type="submit" className='btn'>Wyszukaj</button>
+        <button className={classes.actions__button + " btn"} type="submit">Wyszukaj</button>
         </div>
       </form>
     </div>

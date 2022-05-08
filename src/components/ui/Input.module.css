@@ -2,13 +2,13 @@
   margin-bottom: 0.5rem;
 }
 
-.control label {
+.control__label {
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.control input {
+.control__input {
   font: inherit;
   padding: 0.35rem;
   border-radius: 4px;
@@ -19,7 +19,7 @@
   font-size: 1.25rem;
 }
 
-.control input:focus {
+.control__input:focus {
   background-color: #cbf8f8;
   outline-color: teal;
 }

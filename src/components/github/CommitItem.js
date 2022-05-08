@@ -16,10 +16,10 @@ const CommitItem = (props) => {
   return (
     <li
       key={props.commit.id.toString()}
-      className={props.index % 2 === 0 ? classes.item : classes.commitspecial}
+      className={props.index % 2 === 0 ? classes.list__item : classes.list__item__special}
     >
-      <div className={classes.container}>Data: {getDate(props.commit.date)}</div>
-      <div className={classes.container}>Wiadomość: {props.commit.message}</div>
+      <div className={classes.list__container}>Data: {getDate(props.commit.date)}</div>
+      <div className={classes.list__container}>Wiadomość: {props.commit.message}</div>
     </li>
   );
 };

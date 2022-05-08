@@ -2,17 +2,17 @@
   position: relative;
 }
 
-.control {
+.form__control {
   margin-bottom: 0.5rem;
 }
 
-.control label {
+.form__label {
   font-weight: bold;
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.control input {
+.form__input {
   font: inherit;
   padding: 0.35rem;
   border-radius: 4px;
@@ -23,7 +23,12 @@
   font-size: 1.25rem;
 }
 
-.control input:focus {
+.form__control:focus {
+  background-color: #cbf8f8;
+  outline-color: teal;
+}
+
+.form__input:focus {
   background-color: #cbf8f8;
   outline-color: teal;
 }
@@ -32,7 +37,7 @@
   text-align: right;
 }
 
-.actions button {
+.actions__button {
   font-size: 1.25rem;
 }
 /*# sourceMappingURL=Search.module.css.map */

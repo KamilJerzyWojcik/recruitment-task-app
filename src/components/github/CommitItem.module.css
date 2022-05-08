@@ -1,4 +1,4 @@
-.item {
+.list__item {
   margin: 1rem 0;
   padding: 1rem;
   display: -webkit-box;
@@ -16,7 +16,7 @@
   background-color: goldenrod;
 }
 
-.commitspecial {
+.list__item__special {
   margin: 1rem 0;
   padding: 1rem;
   display: -webkit-box;
@@ -34,7 +34,7 @@
   background-color: yellowgreen;
 }
 
-.container {
+.list__container {
   position: relative;
   margin: 0px;
   width: 40%;
