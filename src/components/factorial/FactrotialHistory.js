@@ -18,7 +18,7 @@ const FactorialHistory = () => {
 
   const numbers = factorialCtx.numbers.map((number, index) => {
     return (
-      <li className={classes.item} key={index}>
+      <li className={index % 2 === 0 ? classes.item : classes.itemspecial} key={index}>
         <div>data: {getDate(number.date)}</div>
         <div>wartość: {number.value}</div>
       </li>

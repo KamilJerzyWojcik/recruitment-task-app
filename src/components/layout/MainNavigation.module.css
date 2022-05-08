@@ -19,7 +19,7 @@
   color: white;
 }
 
-.nav ul {
+.navigation {
   list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,19 +28,19 @@
   padding: 0;
 }
 
-.nav li {
+.navigation__item {
   margin-left: 1.5rem;
   font-size: 1.25rem;
 }
 
-.nav a {
+.navigation__link {
   text-decoration: none;
   color: #88dfdf;
 }
 
-.nav a:hover,
-.nav a:active,
-.nav a.active {
+.navigation__link:hover,
+.navigation__link:active,
+.navigation__link.active {
   color: #e6fcfc;
 }
 /*# sourceMappingURL=MainNavigation.module.css.map */

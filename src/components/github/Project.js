@@ -1,13 +1,15 @@
 import React from "react";
 import CommitItem from "./CommitItem";
+import classes from "./Project.module.css";
 
 const Project = props => {
   return (
     <div>
-      <li key={props.project.id.toString()}>{props.project.name}</li>
+      <li key={props.project.id.toString()} className={props.index % 2 === 0 ? classes.item : classes.projectitemspecial} >{props.project.name}</li>
+      Ostatnie zmiany:
       <ul>
-        {props.project.commits.map((c) => (
-          <CommitItem key={c.id.toString()} commit={c} />
+        {props.project.commits.map((c, index) => (
+          <CommitItem index={index} key={c.id.toString()} commit={c} />
         ))}
       </ul>
     </div>

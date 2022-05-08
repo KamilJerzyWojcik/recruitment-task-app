@@ -6,22 +6,23 @@ const MainNavigation = () => {
 return <header className={classes.header}>
       <div className={classes.logo}>Test App</div>
       <nav className={classes.nav}>
-        <ul>
-          <li>
+        <ul className={classes.navigation}>
+          <li className={classes.navigation__item}>
             <NavLink to="/github"
-            className = {({ isActive }) => (isActive ? classes.active : "")}>
+            className = {({ isActive }) => (isActive ? `${classes.navigation__link + " " + classes.active}` : classes.navigation__link)}
+            >
               Github wyszukiwarka
             </NavLink>
           </li>
-          <li>
+          <li className={classes.navigation__item}>
             <NavLink to="/factorial" 
-            className = {({ isActive }) => (isActive ? classes.active : "")}>
+            className = {({ isActive }) => (isActive ? `${classes.navigation__link + " " + classes.active}` : classes.navigation__link)}>
               Siła
             </NavLink>
           </li>
-          <li>
+          <li className={classes.navigation__item}>
             <NavLink to="/about"
-            className = {({ isActive }) => (isActive ? classes.active : "")}>
+            className = {({ isActive }) => (isActive ? `${classes.navigation__link + " " + classes.active}` : classes.navigation__link)}>
               O projekcie
             </NavLink>
           </li>
