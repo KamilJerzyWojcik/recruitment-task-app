@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProjectList from "../components/github/ProjectList";
 import Search from "../components/github/Search";
 import { fetchRepos, fetchCommits } from "../services/GithubService";
+import classes from "./Github.module.css";
 
 const Github = () => {
   const [curretnLogin, setCurrentLogin] = useState();
@@ -14,7 +15,6 @@ const Github = () => {
     const newRepos = await fetchRepos(login)
       .then((r) => {
         if (!r.ok) {
-          console.log(r);
           if (r.status.toString() === "404") {
             setIsCorrectLogin(false);
             throw new Error();
@@ -22,6 +22,7 @@ const Github = () => {
             throw new Error(r.message ?? "coś poszło źle");
           }
         }
+        setIsCorrectLogin(true);
         return r.json();
       })
       .then((result) => {
@@ -80,6 +81,7 @@ const Github = () => {
   };
 
   const githubSubmitHandler = async (login) => {
+    setError();
     const repos = await getRepos(login);
     if (!repos) return;
     const reposWithCommits = await addCommitsToRepos(login, repos);
@@ -94,7 +96,7 @@ const Github = () => {
       <h1>Wyszukaj projekty na Github</h1>
       <Search onSubmit={githubSubmitHandler} />
       {!isCorrectLogin && <p>Brak loginu</p>}
-      {error && error.message && <p>Błąd pobrania danych: {error.message}</p>}
+      {error && error.message && <p className={classes.error}>Błąd pobrania danych: {error.message}</p>}
       {!error && isSearched && <ProjectList projects={repos} login={curretnLogin} />}
     </div>
   );
