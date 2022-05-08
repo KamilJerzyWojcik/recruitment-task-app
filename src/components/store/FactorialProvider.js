@@ -24,8 +24,8 @@ const FactorialProvider = (props) => {
     defaultFactorialState
   );
 
-  const addNumberHandler = number => {
-    dispatchFactorialAction({ type: ADD_NUMBER, number: number });
+  const addNumberHandler = (number) => {
+    dispatchFactorialAction({ type: ADD_NUMBER, number: {value: number.value, date: number.date} });
   };
 
   const factorialContext = {

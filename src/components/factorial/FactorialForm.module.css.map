@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,QAAQ,EAAE,QAAQ;CACnB;;AAED,AAAA,MAAM,CAAC;EACL,KAAK,EAAE,GAAG;CACX",
+    "sources": [
+        "FactorialForm.module.scss"
+    ],
+    "names": [],
+    "file": "FactorialForm.module.css"
+}

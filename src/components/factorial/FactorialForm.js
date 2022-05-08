@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
+import classes from "./FactorialForm.module.css";
 
 const FactorialForm = (props) => {
   const maxValueNumber = 100;
@@ -23,12 +24,12 @@ const FactorialForm = (props) => {
       return;
     }
     setIsNumberValid(true);
-    props.onSubmit(valueNumber);
+    props.onSubmit(valueNumber, new Date());
   };
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={classes.form}>
         <Input
           ref={numberInputRef}
           label="Podaj liczbę do obliczenia silni"
@@ -41,8 +42,8 @@ const FactorialForm = (props) => {
             defaultValue: "0",
           }}
         />
-        {!props.safeError && <p>Przekroczono dopuszczalną wielkość liczby</p>}
-        {!isNumberValid && <p>proszę wpisać liczbę całkowitą od {minValueNumber} do {maxValueNumber}</p>}
+        {!props.safeError && <p className={classes.error}>Przekroczono dopuszczalną wielkość liczby</p>}
+        {!isNumberValid && <p className={classes.error}>proszę wpisać liczbę całkowitą od {minValueNumber} do {maxValueNumber}</p>}
         <Button text="Wylicz silnię" />
       </form>
     </div>

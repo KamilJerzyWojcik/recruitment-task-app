@@ -18,7 +18,12 @@ const Github = () => {
           if (r.status.toString() === "404") {
             setIsCorrectLogin(false);
             throw new Error();
-          } else {
+          }
+          else if (r.status.toString() === "403") {
+            setIsCorrectLogin(false);
+            throw new Error("Zabroniony dostęp do danych");
+          }
+          else {
             throw new Error(r.message ?? "coś poszło źle");
           }
         }

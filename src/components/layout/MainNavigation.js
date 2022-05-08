@@ -1,25 +1,29 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
-return <header>
-      <div>Test App</div>
-      <nav>
+return <header className={classes.header}>
+      <div className={classes.logo}>Test App</div>
+      <nav className={classes.nav}>
         <ul>
           <li>
-            <Link to="/github">
+            <NavLink to="/github"
+            className = {({ isActive }) => (isActive ? classes.active : "")}>
               Github wyszukiwarka
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/factorial">
+            <NavLink to="/factorial" 
+            className = {({ isActive }) => (isActive ? classes.active : "")}>
               Siła
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/about">
+            <NavLink to="/about"
+            className = {({ isActive }) => (isActive ? classes.active : "")}>
               O projekcie
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

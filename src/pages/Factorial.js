@@ -28,10 +28,10 @@ const Factorial = () => {
       return factorial;
   }
 
-  const addToHistoryHandler = (num) => {
+  const addToHistoryHandler = (num, date) => {
     const factorial = calcFactorial(num)
     if (factorial) {
-        factorialCtx.addNumber(factorial);
+        factorialCtx.addNumber({value: factorial, date: date});
         if (!isSafeInteger) setIsSafeInteger(true);
         if (!isNumbers) setIsNumbers(true);
     }

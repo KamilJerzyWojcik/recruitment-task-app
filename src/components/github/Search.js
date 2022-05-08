@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import classes from "./Search.module.css";
 
 const Search = (props) => {
   const enteredLoginRef = useRef();
@@ -18,13 +19,15 @@ const Search = (props) => {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
-        <div>
+      <form onSubmit={submitHandler} className={classes.form}>
+        <div className={classes.control}>
           <label htmlFor="login">Wpisz login</label>
           <input type="text" id="login" ref={enteredLoginRef} />
           {!isValidLogin && <p>proszę wpisać login</p>}
         </div>
-        <button type="submit">Wyszukaj</button>
+        <div className={classes.actions}>
+        <button type="submit" className='btn'>Wyszukaj</button>
+        </div>
       </form>
     </div>
   );
