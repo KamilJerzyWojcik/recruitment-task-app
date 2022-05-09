@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProjectList from "../components/github/ProjectList";
 import Search from "../components/github/Search";
-import { fetchRepos, fetchCommits } from "../services/GithubService";
+import { fetchRepos, fetchCommits, fetchLogin } from "../services/GithubService";
 import classes from "./Github.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { setRepos, setError, setIsSearched, setCurrentLogin } from '../store/GithubSlice';
@@ -17,6 +17,21 @@ const Github = () => {
   const dispatch = useDispatch()
 
   const [isCorrectLogin, setIsCorrectLogin] = useState(true);
+
+  const checkLogin = async (login) => {
+    const isCorretLogin = await fetchLogin(login)
+    .then(r => {
+      if (!r.ok && r.status.toString() === "404") {
+        setIsCorrectLogin(false);
+        throw new Error();
+      }
+      return true;
+    }).catch((error) => {
+      dispatch(setError({ value: error.message ?? undefined, isError: true }));
+    });
+
+    return isCorretLogin;
+  };
 
   const getRepos = async (login) => {
     const newRepos = await fetchRepos(login)
@@ -49,7 +64,7 @@ const Github = () => {
         return newRepos;
       })
       .catch((error) => {
-        dispatch(setError({ value: error.message ?? undefined }));
+        dispatch(setError({ value: error.message ?? undefined, isError: true }));
       });
 
     return newRepos;
@@ -76,7 +91,7 @@ const Github = () => {
         });
       })
       .catch((error) => {
-        dispatch(setError({ value: error.message ?? undefined }));
+        dispatch(setError({ value: error.message ?? undefined, isError:true }));
       });
 
     return { ...repo, commits: commits };
@@ -93,13 +108,17 @@ const Github = () => {
   };
 
   const githubSubmitHandler = async (login) => {
-    dispatch(setError({ value: undefined }));
+    dispatch(setError({ value: undefined, isError:false }));
+    const isLoginCorrect = await checkLogin(login);
+    if (!isLoginCorrect) return;
+
     const repos = await getRepos(login);
     if (!repos) return;
+
     const reposWithCommits = await addCommitsToRepos(login, repos);
     if (!reposWithCommits) return;
-    dispatch(setIsSearched({value: true}));
 
+    dispatch(setIsSearched({value: true}));
     dispatch(setRepos({value: reposWithCommits}));
     dispatch(setCurrentLogin({value: login}));
   };
@@ -109,8 +128,8 @@ const Github = () => {
       <h1>Wyszukaj projekty na Github</h1>
       <Search onSubmit={githubSubmitHandler} />
       {!isCorrectLogin && <p>Brak loginu</p>}
-      {error && error.value && <p className={classes.error}>Błąd pobrania danych: {error.value}</p>}
-      {!error && isSearched && <ProjectList projects={repos} login={currentLogin} />}
+      {error.isError && error.value && <p className={classes.error}>Błąd pobrania danych: {error.value}</p>}
+      {!error.isError && isSearched && <ProjectList projects={repos} login={currentLogin} />}
     </div>
   );
 };

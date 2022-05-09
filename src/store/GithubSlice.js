@@ -7,7 +7,7 @@ export const GithubSlice = createSlice({
   initialState: {
     repos: [],
     isSearched: false,
-    error: undefined,
+    error: {message: undefined, isError: false},
     currentLogin: undefined
   },
   reducers: {
@@ -15,7 +15,7 @@ export const GithubSlice = createSlice({
       state.repos = action.payload.value;
     },
     setError: (state, action) => {
-        state.error = action.payload.value;
+        state.error = action.payload;
     },
     setIsSearched: (state, action) => {
         state.isSearched = action.payload.value;
