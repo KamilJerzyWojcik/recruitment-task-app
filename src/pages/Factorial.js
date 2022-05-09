@@ -1,12 +1,13 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import FactorialForm from "../components/factorial/FactorialForm";
 import FactorialHistory from "../components/factorial/FactrotialHistory";
-import FactorialContext from "../components/store/FactorialContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { addNumber, setIsNumbers } from '../store/FactorialSlice';
 
 const Factorial = () => {
-  const [isNumbers, setIsNumbers] = useState(false);
-  const factorialCtx = useContext(FactorialContext);
   const [isSafeInteger, setIsSafeInteger] = useState(true);
+  const isNumber = useSelector(state => state.factorial.isNumbers)
+  const dispatch = useDispatch()
 
   const calcFactorial = number => {
 
@@ -31,9 +32,9 @@ const Factorial = () => {
   const addToHistoryHandler = (num, date) => {
     const factorial = calcFactorial(num)
     if (factorial) {
-        factorialCtx.addNumber({value: factorial, date: date});
+        dispatch(addNumber({value: factorial, date: date.toString()}));
         if (!isSafeInteger) setIsSafeInteger(true);
-        if (!isNumbers) setIsNumbers(true);
+        if (!isNumber) dispatch(setIsNumbers({value: true}));
     }
   };
 
@@ -41,7 +42,7 @@ const Factorial = () => {
     <Fragment>
       <h1>Oblicz siłę</h1>
       <FactorialForm onSubmit={addToHistoryHandler} safeError={isSafeInteger}/>
-      {isNumbers && <FactorialHistory />}
+      {isNumber && <FactorialHistory />}
     </Fragment>
   );
 };
