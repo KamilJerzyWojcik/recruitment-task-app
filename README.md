@@ -3,7 +3,7 @@
 ## Zastosownie technologie:
 ### ReactJs
 ### Redux
-### Scss
+### Sass
 ### hostowana na githuba pages
 https://kamiljerzywojcik.github.io/recruitment-task-app/
 
