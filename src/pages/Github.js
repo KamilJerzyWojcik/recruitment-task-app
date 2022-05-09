@@ -25,8 +25,14 @@ const Github = () => {
         setIsCorrectLogin(false);
         throw new Error();
       }
+      if (!r.ok && r.status.toString() === "403") {
+        console.log(r);
+        throw new Error("Brak dostępu do zasobów, proszę poczekać");
+      }
       return true;
     }).catch((error) => {
+      
+
       dispatch(setError({ value: error.message ?? undefined, isError: true }));
     });
 
@@ -39,7 +45,7 @@ const Github = () => {
         if (!r.ok) {
           if (r.status.toString() === "404") {
             setIsCorrectLogin(false);
-            throw new Error();
+            throw new Error("Brak repozytoriów");
           }
           else if (r.status.toString() === "403") {
             setIsCorrectLogin(false);
@@ -118,9 +124,9 @@ const Github = () => {
     const reposWithCommits = await addCommitsToRepos(login, repos);
     if (!reposWithCommits) return;
 
-    dispatch(setIsSearched({value: true}));
     dispatch(setRepos({value: reposWithCommits}));
     dispatch(setCurrentLogin({value: login}));
+    dispatch(setIsSearched({value: true}));
   };
 
   return (
