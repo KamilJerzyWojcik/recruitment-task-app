@@ -35,7 +35,6 @@ const FactorialForm = (props) => {
           ref={numberInputRef}
           label="Podaj liczbę do obliczenia silni"
           input={{
-            id: "number_" + Math.random(),
             type: "number",
             min: `${minValueNumber}`,
             max: `${maxValueNumber}`,

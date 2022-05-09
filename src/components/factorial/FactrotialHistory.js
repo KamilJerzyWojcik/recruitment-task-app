@@ -1,20 +1,10 @@
 import React from "react";
 import classes from "./FactorialHistory.module.css";
 import { useSelector } from 'react-redux';
+import { getDate } from "../../services/DateService";
 
 const FactorialHistory = () => {
   const numbersState = useSelector(state => state.factorial.numbers);
-
-  const getDate = (date) => {
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const year = date.getFullYear();
-    const hour = date.getHours();
-    const min = date.getMinutes();
-    const sec = date.getSeconds();
-
-    return `${day}/${month}/${year} ${hour}:${min}:${sec}`;
-  };
 
   const numbers = numbersState.map((number, index) => {
     return (
