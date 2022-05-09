@@ -35,4 +35,8 @@
 .actions__button {
   font-size: 1.25rem;
 }
+
+.error {
+  color: red;
+}
 /*# sourceMappingURL=Search.module.css.map */

@@ -6,7 +6,7 @@ import { addNumber, setIsNumbers } from '../store/FactorialSlice';
 
 const Factorial = () => {
   const [isSafeInteger, setIsSafeInteger] = useState(true);
-  const isNumber = useSelector(state => state.factorial.isNumbers)
+  const isNumbers = useSelector(state => state.factorial.isNumbers)
   const dispatch = useDispatch()
 
   const calcFactorial = number => {
@@ -34,7 +34,7 @@ const Factorial = () => {
     if (factorial) {
         dispatch(addNumber({value: factorial, date: date.toString()}));
         if (!isSafeInteger) setIsSafeInteger(true);
-        if (!isNumber) dispatch(setIsNumbers({value: true}));
+        if (!isNumbers) dispatch(setIsNumbers({value: true}));
     }
   };
 
@@ -42,7 +42,7 @@ const Factorial = () => {
     <Fragment>
       <h1>Oblicz siłę</h1>
       <FactorialForm onSubmit={addToHistoryHandler} safeError={isSafeInteger}/>
-      {isNumber && <FactorialHistory />}
+      {isNumbers && <FactorialHistory />}
     </Fragment>
   );
 };

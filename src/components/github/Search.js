@@ -23,7 +23,7 @@ const Search = (props) => {
         <div className={classes.form__control}>
           <label className={classes.form__label} htmlFor="login">Wpisz login</label>
           <input className={classes.form__input} type="text" id="login" ref={enteredLoginRef} />
-          {!isValidLogin && <p>proszę wpisać login</p>}
+          {!isValidLogin && <p className={classes.error}>proszę wpisać login</p>}
         </div>
         <div className={classes.actions}>
         <button className={classes.actions__button + " btn"} type="submit">Wyszukaj</button>

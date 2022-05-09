@@ -25,6 +25,7 @@ const FactorialForm = (props) => {
     }
     setIsNumberValid(true);
     props.onSubmit(valueNumber, new Date());
+    numberInputRef.current.value = "";
   };
 
   return (
@@ -39,7 +40,7 @@ const FactorialForm = (props) => {
             min: `${minValueNumber}`,
             max: `${maxValueNumber}`,
             step: "1",
-            defaultValue: "0",
+            defaultValue: "",
           }}
         />
         {!props.safeError && <p className={classes.error}>Przekroczono dopuszczalną wielkość liczby</p>}

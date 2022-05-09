@@ -61,6 +61,7 @@ const About = () => {
           <li>wyświetla co drugi element każdej listy wyróżnionym kolorem; </li>
           <li>jest hostowana (github pages, heroku, itd..)</li>
           <li>kod aplikacji jest dostępny publicznie;</li>
+          <li>Mile widziane użycie middlewarów reduxowych.</li>
         </ul>
       </section>
     </section>

@@ -3,12 +3,19 @@ import ProjectList from "../components/github/ProjectList";
 import Search from "../components/github/Search";
 import { fetchRepos, fetchCommits } from "../services/GithubService";
 import classes from "./Github.module.css";
+import { useSelector, useDispatch } from 'react-redux';
+import { setRepos, setError, setIsSearched, setCurrentLogin } from '../store/GithubSlice';
 
 const Github = () => {
-  const [curretnLogin, setCurrentLogin] = useState();
-  const [repos, setRepos] = useState([]);
-  const [error, setError] = useState();
-  const [isSearched, setIsSearched] = useState(false);
+  // const [curretnLogin, setCurrentLogin] = useState();
+  const currentLogin = useSelector(state => state.github.currentLogin)
+  const repos = useSelector(state => state.github.repos)
+  const error = useSelector(state => state.github.error)
+  const isSearched = useSelector(state => state.github.isSearched)
+
+
+  const dispatch = useDispatch()
+
   const [isCorrectLogin, setIsCorrectLogin] = useState(true);
 
   const getRepos = async (login) => {
@@ -35,14 +42,14 @@ const Github = () => {
           return {
             id: r.id,
             name: r.name,
-            lastUpdated: new Date(r.updated_at),
+            lastUpdated: r.updated_at,
             url: r.html_url,
           };
         });
         return newRepos;
       })
       .catch((error) => {
-        setError({ message: error.message ?? undefined });
+        dispatch(setError({ value: error.message ?? undefined }));
       });
 
     return newRepos;
@@ -64,12 +71,12 @@ const Github = () => {
             message: c.commit.message,
             url: c.commit.url,
             comitterName: c.commit.committer.name,
-            date: new Date(c.commit.committer.date),
+            date: c.commit.committer.date,
           };
         });
       })
       .catch((error) => {
-        setError({ message: error.message });
+        dispatch(setError({ value: error.message ?? undefined }));
       });
 
     return { ...repo, commits: commits };
@@ -86,14 +93,15 @@ const Github = () => {
   };
 
   const githubSubmitHandler = async (login) => {
-    setError();
+    dispatch(setError({ value: undefined }));
     const repos = await getRepos(login);
     if (!repos) return;
     const reposWithCommits = await addCommitsToRepos(login, repos);
     if (!reposWithCommits) return;
-    setIsSearched(true);
-    setRepos(reposWithCommits);
-    setCurrentLogin(login);
+    dispatch(setIsSearched({value: true}));
+
+    dispatch(setRepos({value: reposWithCommits}));
+    dispatch(setCurrentLogin({value: login}));
   };
 
   return (
@@ -101,8 +109,8 @@ const Github = () => {
       <h1>Wyszukaj projekty na Github</h1>
       <Search onSubmit={githubSubmitHandler} />
       {!isCorrectLogin && <p>Brak loginu</p>}
-      {error && error.message && <p className={classes.error}>Błąd pobrania danych: {error.message}</p>}
-      {!error && isSearched && <ProjectList projects={repos} login={curretnLogin} />}
+      {error && error.value && <p className={classes.error}>Błąd pobrania danych: {error.value}</p>}
+      {!error && isSearched && <ProjectList projects={repos} login={currentLogin} />}
     </div>
   );
 };
